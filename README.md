@@ -1,6 +1,9 @@
 
 Get an [API Key](https://customer.cloudkarafka.com/team/api).
 
+
+### Deploy on Cloud Foundry
+
 ```
 ./mvnw clean package
 cf push --no-start
@@ -26,5 +29,36 @@ cf create-service-broker cloudkarafka admin xxxxxxxxxxxx https://cloud-karafka-s
 
 ```
 cf create-service cloudkarafka duck my-kafka
+```
 
+#### Deploy sample consumer
+
+```
+git clone git@github.com:making/demo-kafka-consumer.git
+cd demo-kafka-consumer
+./mvnw clean package -DskipTests=true
+
+cf push
+```
+
+Receive messages
+
+```
+curl -H "Accept: text/event-stream" -k https://demo-kafka-consumer.<app domain>/messages
+```
+
+#### Deploy sample producer
+
+```
+git clone git@github.com:making/demo-kafka-producer.git
+cd demo-kafka-producer
+./mvnw clean package -DskipTests=true
+
+cf push
+```
+
+Send messages
+
+```
+while true;do curl -k -s https://demo-kafka-producer.<app domain>/messages -s -H "content-type: text/plain" -d Hello-$(uuidgen) -w '\n';sleep 1;done
 ```
