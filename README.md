@@ -5,7 +5,8 @@ Get an [API Key](https://customer.cloudkarafka.com/team/api).
 ### Deploy on Cloud Foundry
 
 ```
-./mvnw clean package
+mkdir target
+wget http://repo1.maven.org/maven2/am/ik/servicebroker/cloud-karafka-service-broker/0.0.1/cloud-karafka-service-broker-0.0.1.jar -o target/cloud-karafka-service-broker-0.0.1.jar
 cf push --no-start
 cf set-env cloud-karafka-service-broker CLOUDKARAFKA_API_KEY xxxxxxxxxxxx
 cf set-env cloud-karafka-service-broker SPRING_SECURITY_USER_PASSWORD xxxxxxxxxxxx
