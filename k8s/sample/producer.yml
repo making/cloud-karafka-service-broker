@@ -1,0 +1,58 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: demo-kafka-producer-service
+  labels:
+    app: demo-kafka-producer
+spec:
+  selector:
+    app: demo-kafka-producer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: demo-kafka-producer
+  labels:
+    app: demo-kafka-producer
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: demo-kafka-producer
+    spec:
+      containers:
+      - name: demo-kafka-producer
+        image: making/demo-kafka-producer:0.0.1-SNAPSHOT
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SERVER_PORT
+          value: "8080"
+        - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+          valueFrom:
+            secretKeyRef:
+              name: demo-kafka-secret
+              key: brokers
+        - name: CLOUDKARAFKA_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: demo-kafka-secret
+              key: username
+        - name: CLOUDKARAFKA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: demo-kafka-secret
+              key: password

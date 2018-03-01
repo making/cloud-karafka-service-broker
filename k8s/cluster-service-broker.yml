@@ -1,0 +1,11 @@
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ClusterServiceBroker
+metadata:
+  name: cloudkarafka
+spec:
+  url: http://cloudkarafka-service-broker-service.osb.svc.cluster.local
+  authInfo:
+    basic:
+      secretRef:
+        name: cloudkarafka-service-broker-secret
+        namespace: osb
