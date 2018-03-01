@@ -1,0 +1,8 @@
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceBinding
+metadata:
+  name: demo-kafka-binding
+spec:
+  instanceRef:
+    name: demo-kafka
+  secretName: demo-kafka-secret
