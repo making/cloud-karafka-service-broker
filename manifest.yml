@@ -1,6 +1,6 @@
 applications:
 - name: cloud-karafka-service-broker
-  path: target/cloud-karafka-service-broker-0.0.1-SNAPSHOT.jar
+  path: cloud-karafka-service-broker.jar
   memory: 512m
   env:
     SERVER_TOMCAT_MAX_THREADS: 4
