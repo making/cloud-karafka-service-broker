@@ -1,5 +1,6 @@
 package am.ik.servicebroker.cloudkarafka.servicebroker;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +35,12 @@ public class ServiceInstanceController {
 		log.info("Provisioning instanceId={}", instanceId);
 
 		String name = "cf_" + instanceId;
+
+		if (this.cloudKarafkaClient.findByName(name).isPresent()) {
+			return ResponseEntity.status(HttpStatus.CONFLICT)
+					.body(Collections.emptyMap());
+		}
+
 		CloudKarafkaPlan plan = DUCKY;
 		CloudKarafkaRegion region = GOOGLE_COMPUTE_ENGINE_US_CENTRAL1;
 		CloudKarafkaInstance instance = this.cloudKarafkaClient.createInstance(name, plan,
