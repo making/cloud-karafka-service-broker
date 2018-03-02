@@ -6,7 +6,7 @@ Get an [API Key](https://customer.cloudkarafka.com/team/api).
 
 ```
 mkdir target
-wget http://repo1.maven.org/maven2/am/ik/servicebroker/cloud-karafka-service-broker/0.0.2/cloud-karafka-service-broker-0.0.2.jar -o cloud-karafka-service-broker.jar
+wget http://repo1.maven.org/maven2/am/ik/servicebroker/cloud-karafka-service-broker/0.0.3/cloud-karafka-service-broker-0.0.3.jar -o cloud-karafka-service-broker.jar
 cf push --no-start
 cf set-env cloud-karafka-service-broker CLOUDKARAFKA_API_KEY xxxxxxxxxxxx
 cf set-env cloud-karafka-service-broker SPRING_SECURITY_USER_PASSWORD xxxxxxxxxxxx

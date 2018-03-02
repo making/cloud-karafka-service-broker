@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - name: cloudkarafka-service-broker
-        image: making/cloud-karafka-service-broker:0.0.2
+        image: making/cloud-karafka-service-broker:0.0.3
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
