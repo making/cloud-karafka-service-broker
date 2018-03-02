@@ -56,7 +56,7 @@ public class CloudKarafkaClient {
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		LinkedCaseInsensitiveMap json = this.restTemplate
 				.exchange("/api/instances", HttpMethod.POST,
-						new HttpEntity(body, headers), LinkedCaseInsensitiveMap.class)
+						new HttpEntity<>(body, headers), LinkedCaseInsensitiveMap.class)
 				.getBody();
 		return this.caseInsensitiveConvert(json);
 	}
