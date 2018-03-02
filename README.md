@@ -63,3 +63,41 @@ Send messages
 ```
 while true;do curl -k -s https://demo-kafka-producer.<app domain>/messages -s -H "content-type: text/plain" -d Hello-$(uuidgen) -w '\n';sleep 1;done
 ```
+
+### Deploy on Kubernetes
+
+#### Set up service catalog 
+```
+./k8/install-service-catalog.sh
+kubectl apply -f k8s/namespace.yml
+```
+
+#### Deploy service broker
+
+```
+cp k8s/secret.yml.old k8s/secret.yml
+# Edit secret.yml for your environment
+
+kubectl apply -f k8s/secret.yml
+kubectl apply -f k8s/deployment.yml
+kubectl apply -f k8s/cluster-service-broker.yml
+```
+
+#### Create and bind a service instance
+
+```
+kubectl apply -f k8s/sample/service-instance.yml
+kubectl apply -f k8s/sample/service-binding.yml
+```
+
+#### Deploy sample consumer
+
+```
+kubectl apply -f k8s/sample/consumer.yml
+```
+
+#### Deploy sample producer
+
+```
+kubectl apply -f k8s/sample/producer.yml
+```
