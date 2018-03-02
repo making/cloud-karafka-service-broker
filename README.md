@@ -5,7 +5,6 @@ Get an [API Key](https://customer.cloudkarafka.com/team/api).
 ### Deploy on Cloud Foundry
 
 ```
-mkdir target
 wget http://repo1.maven.org/maven2/am/ik/servicebroker/cloud-karafka-service-broker/0.0.3/cloud-karafka-service-broker-0.0.3.jar -o cloud-karafka-service-broker.jar
 cf push --no-start
 cf set-env cloud-karafka-service-broker CLOUDKARAFKA_API_KEY xxxxxxxxxxxx
@@ -75,7 +74,7 @@ kubectl apply -f k8s/namespace.yml
 #### Deploy service broker
 
 ```
-cp k8s/secret.yml.old k8s/secret.yml
+cp k8s/secret.yml.sample k8s/secret.yml
 # Edit secret.yml for your environment
 
 kubectl apply -f k8s/secret.yml
