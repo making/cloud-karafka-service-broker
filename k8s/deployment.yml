@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - name: cloudkarafka-service-broker
-        image: making/cloud-karafka-service-broker:0.0.3
+        image: making/cloud-karafka-service-broker:0.1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -46,7 +46,7 @@ spec:
         - name: SPRING_PROFILES_ACTIVE
           value: kubernetes
         - name: _JAVA_OPTIONS
-          value: "-Xmx300M -XX:MaxMetaspaceSize=100M -XX:ReservedCodeCacheSize=32M -Xss512k -XX:CompressedClassSpaceSize=24M -XX:MaxDirectMemorySize=10M -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=1 -XX:+PrintCodeCache"
+          value: "-Xmx44M -XX:MaxMetaspaceSize=100M -XX:ReservedCodeCacheSize=32M -Xss512k -XX:CompressedClassSpaceSize=24M -XX:MaxDirectMemorySize=10M -XX:+PrintCodeCache"
         - name: CLOUDKARAFKA_API_KEY
           valueFrom:
             secretKeyRef:
@@ -64,9 +64,9 @@ spec:
               key: password
         resources:
           limits:
-            memory: "500Mi"
+            memory: "200Mi"
           requests:
-            memory: "500Mi"
+            memory: "200Mi"
         readinessProbe:
           httpGet:
             path: /actuator/health
