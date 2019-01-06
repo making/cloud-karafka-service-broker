@@ -23,10 +23,10 @@ resources:
       uri: git@github.com:making/cloud-karafka-service-broker.git
       branch: develop
       private_key: ((github-private-key))
-      ignore_paths:
-      - ci/*
-      - k8s/*
-      - README.md
+#      ignore_paths:
+#      - ci/*
+#      - k8s/*
+#      - README.md
   - name: repo-version
     type: semver
     source:
@@ -87,7 +87,8 @@ jobs:
         image_resource:
           type: docker-image
           source:
-            repository: maven
+            repository: openjdk
+            tag: 11-slim
         inputs:
         - name: repo
         caches:
@@ -101,7 +102,7 @@ jobs:
             cd repo
             rm -rf ~/.m2
             ln -fs $(pwd)/m2 ~/.m2
-            mvn test
+            ./mvnw test
       on_failure:
         put: slack-alert
         params:
