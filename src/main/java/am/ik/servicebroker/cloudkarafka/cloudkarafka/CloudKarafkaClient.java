@@ -28,7 +28,7 @@ public class CloudKarafkaClient {
 	public CloudKarafkaClient(CloudKarafka cloudKarafka, RestTemplateBuilder builder,
 			ObjectMapper objectMapper) {
 		this.objectMapper = objectMapper;
-		this.restTemplate = builder.basicAuthorization(cloudKarafka.getApiKey(), "")
+		this.restTemplate = builder.basicAuthentication(cloudKarafka.getApiKey(), "")
 				.rootUri(cloudKarafka.getUri()).build();
 	}
 
